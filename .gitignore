@@ -73,6 +73,7 @@ object_store_conf.xml
 job_metrics_conf.xml
 workflow_schedulers_conf.xml
 config/*
+!config/*.*
 config/plugins/interactive_environments/**/*.ini
 config/plugins/**/.cache
 config/plugins/**/.parcel-cache

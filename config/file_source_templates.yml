@@ -1,3 +1,4 @@
 # This is a catalog file for all the user file source templates that are offered by EU's Galaxy server.
-- include: "/Users/pavelvazquez/biohack_galaxy/galaxy/lib/galaxy/files/templates/examples/production_ftp.yml"
-- include: "/Users/pavelvazquez/biohack_galaxy/galaxy/lib/galaxy/files/templates/examples/production_s3fs.yml"
+- include: "/Users/pavelvazquez/elixir/galaxy-bio/lib/galaxy/files/templates/examples/production_ftp.yml"
+- include: "/Users/pavelvazquez/elixir/galaxy-bio/lib/galaxy/files/templates/examples/production_s3fs.yml"
+- include: "/Users/pavelvazquez/elixir/galaxy-bio/lib/galaxy/files/templates/examples/production_ssh.yml"

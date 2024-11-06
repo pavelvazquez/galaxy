@@ -13,6 +13,8 @@ from galaxy.files.templates.models import (
     FileSourceTemplate,
     FtpFileSourceConfiguration,
     FtpFileSourceTemplateConfiguration,
+    SshFileSourceConfiguration,
+    SshFileSourceTemplateConfiguration,
     PosixFileSourceConfiguration,
     PosixFileSourceTemplateConfiguration,
     S3FSFileSourceConfiguration,
@@ -59,6 +61,8 @@ class_to_diagram = {
     S3FSFileSourceConfiguration: "file_source_s3fs_configuration",
     FtpFileSourceTemplateConfiguration: "file_source_ftp_configuration_template",
     FtpFileSourceConfiguration: "file_source_ftp_configuration",
+    SshFileSourceTemplateConfiguration: "file_source_ssh_configuration_template",
+    SshFileSourceConfiguration: "file_source_ssh_configuration",
     WebdavFileSourceTemplateConfiguration: "file_source_webdav_configuration_template",
     WebdavFileSourceConfiguration: "file_source_webdav_configuration",
 }

@@ -30,7 +30,7 @@ from galaxy.util.config_templates import (
     UserDetailsDict,
 )
 
-FileSourceTemplateType = Literal["ftp", "posix", "s3fs", "azure", "onedata", "webdav", "dropbox", "googledrive"]
+FileSourceTemplateType = Literal["ssh", "ftp", "posix", "s3fs", "azure", "onedata", "webdav", "dropbox", "googledrive"]
 
 
 class PosixFileSourceTemplateConfiguration(StrictModel):
@@ -137,6 +137,28 @@ class FtpFileSourceConfiguration(StrictModel):
     writable: bool = False
 
 
+class SshFileSourceTemplateConfiguration(StrictModel):
+    type: Literal["ssh"]
+    host: Union[str, TemplateExpansion]
+    port: Union[int, TemplateExpansion] = 22
+    path: Union[str, TemplateExpansion]
+    user: Optional[Union[str, TemplateExpansion]] = None
+    passwd: Optional[Union[str, TemplateExpansion]] = None
+    writable: Union[bool, TemplateExpansion] = False
+    template_start: Optional[str] = None
+    template_end: Optional[str] = None
+
+
+class SshFileSourceConfiguration(StrictModel):
+    type: Literal["ssh"]
+    host: str
+    port: int = 22
+    path: str
+    user: Optional[str] = None
+    passwd: Optional[str] = None
+    writable: bool = False
+
+
 class AzureFileSourceTemplateConfiguration(StrictModel):
     type: Literal["azure"]
     account_name: Union[str, TemplateExpansion]
@@ -199,6 +221,7 @@ FileSourceTemplateConfiguration = Union[
     PosixFileSourceTemplateConfiguration,
     S3FSFileSourceTemplateConfiguration,
     FtpFileSourceTemplateConfiguration,
+    SshFileSourceTemplateConfiguration,
     AzureFileSourceTemplateConfiguration,
     OnedataFileSourceTemplateConfiguration,
     WebdavFileSourceTemplateConfiguration,
@@ -209,6 +232,7 @@ FileSourceConfiguration = Union[
     PosixFileSourceConfiguration,
     S3FSFileSourceConfiguration,
     FtpFileSourceConfiguration,
+    SshFileSourceConfiguration,
     AzureFileSourceConfiguration,
     OnedataFileSourceConfiguration,
     WebdavFileSourceConfiguration,
@@ -277,6 +301,7 @@ def template_to_configuration(
 
 TypesToConfigurationClasses: Dict[FileSourceTemplateType, Type[FileSourceConfiguration]] = {
     "ftp": FtpFileSourceConfiguration,
+    "ssh": SshFileSourceConfiguration,
     "posix": PosixFileSourceConfiguration,
     "s3fs": S3FSFileSourceConfiguration,
     "azure": AzureFileSourceConfiguration,

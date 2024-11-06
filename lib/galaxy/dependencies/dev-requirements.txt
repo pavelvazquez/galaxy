@@ -41,6 +41,7 @@ filelock==3.16.1
 fluent-logger==0.11.1
 fonttools==4.54.1
 frozenlist==1.5.0
+fs.sshfs==1.0.2
 galaxy-release-util==0.1.11
 graylint==1.1.1
 greenlet==3.1.1

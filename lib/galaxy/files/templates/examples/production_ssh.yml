@@ -1,0 +1,38 @@
+- id: ssh
+  version: 0
+  name: An SSH Server
+  description: |
+    This template allows connecting to EGA via SSH.
+  configuration:
+    type: ssh
+    host: "{{ variables.host }}"
+    port: "{{ variables.port }}"
+    user: "{{ variables.user }}"
+    passwd: "{{ secrets.password }}"
+    path: "{{ variables.path }}"
+  variables:
+    host:
+      label: EGA Host
+      type: string
+      help: Host of EGA Server to connect to.
+      default: outbox.ega-archive.org
+    user:
+      label: EGA User
+      type: string
+      help: |
+        Username to connect with.
+    port:
+      label: SSH Port
+      type: integer
+      help: Port used to connect to the server.
+      default: 22
+    path:
+      label: Path
+      type: string
+      help: Path to the remote directory
+      default: "/outbox"
+  secrets:
+    password:
+      label: EGA Password
+      help: |
+        Password to connect to EGA
