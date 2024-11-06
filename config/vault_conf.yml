@@ -1,0 +1,10 @@
+type: database
+path_prefix: /galaxy
+# Encryption keys must be valid fernet keys
+# To generate a valid key:
+#
+# Use the ascii string value as a key
+# For more details, see: https://cryptography.io/en/latest/fernet/#
+encryption_keys:
+  - SKMYqO5ZbNF9fO0je8S6zFnYmD2DJlLMUxtWt6UYZwg=
+
