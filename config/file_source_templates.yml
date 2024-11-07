@@ -2,3 +2,4 @@
 - include: "/Users/pavelvazquez/elixir/galaxy-bio/lib/galaxy/files/templates/examples/production_ftp.yml"
 - include: "/Users/pavelvazquez/elixir/galaxy-bio/lib/galaxy/files/templates/examples/production_s3fs.yml"
 - include: "/Users/pavelvazquez/elixir/galaxy-bio/lib/galaxy/files/templates/examples/production_ssh.yml"
+- include: "/Users/pavelvazquez/elixir/galaxy-bio/lib/galaxy/files/templates/examples/custom/ega_live_outbox.yml"

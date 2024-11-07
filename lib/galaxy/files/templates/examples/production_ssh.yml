@@ -9,6 +9,7 @@
     port: "{{ variables.port }}"
     user: "{{ variables.user }}"
     passwd: "{{ secrets.password }}"
+    key: "{{ secrets.key }}"
     path: "{{ variables.path }}"
   variables:
     host:
@@ -36,3 +37,7 @@
       label: EGA Password
       help: |
         Password to connect to EGA
+    key:
+      label: EGA Private Key
+      help: |
+        Key to to decrypt crypt4gh file on the fly

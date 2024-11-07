@@ -1,0 +1,31 @@
+- id: ega_live_outbox
+  version: 0
+  name: EGA Live Outbox Connection with transparent Crypt4gh decryption
+  description: |
+    This template allows connecting to the EGA Live Outbox. Requested data will be decrypted during download.
+  configuration:
+    type: crypt4gh_via_ssh
+    host: "outbox.ega-archive.org"
+    user: "{{ variables.user }}"
+    port: 22
+    path: "/outbox"
+    passwd: "{{ secrets.password }}"
+    sec_key: "{{ secrets.sec_key }}"
+    writable: False
+  variables:
+    user:
+      label: User
+      type: string
+      help: |
+        Username to connect with.
+  secrets:
+    password:
+      label: Password
+      help: |
+        Password to connect to SSH server with.
+    sec_key:
+      label: Crypt4gh private key
+      help: |
+        Your private key as generated with the crypt4gh tool for decryption of incoming data.
+        Please do not provide any SSH key here.
+        Only dedicated Crypt4gh keys are allowed with this Galaxy integration.

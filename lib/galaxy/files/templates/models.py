@@ -30,7 +30,7 @@ from galaxy.util.config_templates import (
     UserDetailsDict,
 )
 
-FileSourceTemplateType = Literal["ssh", "ftp", "posix", "s3fs", "azure", "onedata", "webdav", "dropbox", "googledrive"]
+FileSourceTemplateType = Literal["ssh", "ftp", "posix", "s3fs", "azure", "onedata", "webdav", "dropbox", "googledrive", "crypt4gh_via_ssh"]
 
 
 class PosixFileSourceTemplateConfiguration(StrictModel):
@@ -144,6 +144,7 @@ class SshFileSourceTemplateConfiguration(StrictModel):
     path: Union[str, TemplateExpansion]
     user: Optional[Union[str, TemplateExpansion]] = None
     passwd: Optional[Union[str, TemplateExpansion]] = None
+    key: Optional[Union[str, TemplateExpansion]] = None
     writable: Union[bool, TemplateExpansion] = False
     template_start: Optional[str] = None
     template_end: Optional[str] = None
@@ -156,7 +157,31 @@ class SshFileSourceConfiguration(StrictModel):
     path: str
     user: Optional[str] = None
     passwd: Optional[str] = None
+    key: Optional[str] = None
     writable: bool = False
+
+class Crypt4ghSshFileSourceTemplateConfiguration(StrictModel):
+    type: Literal["crypt4gh_via_ssh"]
+    host: Union[str, TemplateExpansion]
+    port: Union[int, TemplateExpansion] = 22
+    user: Union[str, TemplateExpansion]
+    passwd: Union[str, TemplateExpansion]
+    sec_key: Union[str, TemplateExpansion]
+    path: Union[str, TemplateExpansion]
+    writable: Union[bool, TemplateExpansion] = False
+    template_start: Optional[str] = None
+    template_end: Optional[str] = None
+
+class Crypt4ghSshFileSourceConfiguration(StrictModel):
+    type: Literal["crypt4gh_via_ssh"]
+    host: str
+    port: int = 22
+    user: str
+    passwd: str
+    sec_key: str
+    path: str
+    writable: bool = False
+
 
 
 class AzureFileSourceTemplateConfiguration(StrictModel):
@@ -227,6 +252,7 @@ FileSourceTemplateConfiguration = Union[
     WebdavFileSourceTemplateConfiguration,
     DropboxFileSourceTemplateConfiguration,
     GoogleDriveFileSourceTemplateConfiguration,
+    Crypt4ghSshFileSourceTemplateConfiguration,
 ]
 FileSourceConfiguration = Union[
     PosixFileSourceConfiguration,
@@ -238,6 +264,7 @@ FileSourceConfiguration = Union[
     WebdavFileSourceConfiguration,
     DropboxFileSourceConfiguration,
     GoogleDriveFileSourceConfiguration,
+    Crypt4ghSshFileSourceConfiguration,
 ]
 
 
@@ -309,6 +336,7 @@ TypesToConfigurationClasses: Dict[FileSourceTemplateType, Type[FileSourceConfigu
     "webdav": WebdavFileSourceConfiguration,
     "dropbox": DropboxFileSourceConfiguration,
     "googledrive": GoogleDriveFileSourceConfiguration,
+    "crypt4gh_via_ssh": Crypt4ghSshFileSourceConfiguration,
 }
 
 
