@@ -44,8 +44,8 @@ class Crypt4ghViaSshFilesSource(SshFilesSource):
             props = self._serialization_props(user_context)
             _ = props.pop("path")
             sec_key_data = io.BytesIO(base64.b64decode(props.pop("sec_key")))
-            assert sec_key_data.read(len(keys.ssh.MAGIC_WORD)) == keys.ssh.MAGIC_WORD
-            parsed_sec_key = keys.ssh.parse_private_key(sec_key_data, None)[0]
+            assert sec_key_data.read(len(keys.c4gh.MAGIC_WORD)) == keys.c4gh.MAGIC_WORD
+            parsed_sec_key = keys.c4gh.parse_private_key(sec_key_data, None)
             file_path = source_path.split("://")[-1].split("/", 1)[1]
             decrypt(
                 [(0, parsed_sec_key, None)],
