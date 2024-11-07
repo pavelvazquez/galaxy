@@ -40,7 +40,6 @@ class Crypt4ghViaSshFilesSource(SshFilesSource):
         user_context: OptionalUserContext = None,
         opts: Optional[FilesSourceOptions] = None,
     ):
-
         with open(native_path, "wb") as write_file:
             props = self._serialization_props(user_context)
             _ = props.pop("path")
@@ -53,5 +52,25 @@ class Crypt4ghViaSshFilesSource(SshFilesSource):
                 self._get_root_handle(props, opts)._sftp.open(file_path),
                 write_file
             )
+
+    def _resource_info_to_dict(self, dir_path, resource_info):
+        """Override to adjust filenames for display, removing the .c4gh suffix."""
+        name = resource_info.name
+        display_name = name[:-5] if name.endswith(".c4gh") else name
+        path = os.path.join(dir_path, name)
+        uri = self.uri_from_path(path)
+        if resource_info.is_dir:
+            return {"class": "Directory", "name": display_name, "uri": uri, "path": path}
+        else:
+            created = resource_info.created
+            return {
+                "class": "File",
+                "name": display_name,
+                "size": resource_info.size,
+                "ctime": self.to_dict_time(created),
+                "uri": uri,
+                "path": path,
+            }
+
 
 __all__ = ("Crypt4ghViaSshFilesSource",)
